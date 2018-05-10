@@ -1,2 +1,2 @@
-[docker]
+[mysql]
 localhost ansible_connection=local

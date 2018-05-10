@@ -10,6 +10,10 @@
 
 # download mysql image
 
+- name: Ensure mysql image exists
+  docker_image:
+    name: '{{ mysql_image }}:{{ mysql_version }}'
+
 - set_fact:
     exposed_port: "{{ [ mysql_port + '3306' ] if mysql_exposed_port else [] }}"
     volumes: []
