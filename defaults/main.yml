@@ -9,16 +9,17 @@ mysql_container_name: mysql
 
 mysql_port: '3306'
 mysql_socket_internal_path: /var/run/mysqld/mysql.socket
-mysql_socket_path: /var/run/mysql.sock
+mysql_socket_path: /var/run/mysqld/mysql.socket
 
 mysql_data_path: /data/var/lib/mysql
 mysql_data_internal_path: /var/lib/mysql
 
 mysql_my_cnf_file: /etc/mysql/my.cnf
-mysql_my_cnf_internal_file: /etc/mysql/my.cnf
+mysql_my_cnf_internal_file: /etc/mysql/conf.d/custom.cnf
 
 mysql_root_password: 'mysecretpassword'
 
 mysqld_config:
   key_buffer_size: '16M'
-  max_allowed_packet: '8M'
+  max_allowed_packet: '16M'
+  default_storage_engine: InnoDB

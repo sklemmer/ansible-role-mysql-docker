@@ -35,13 +35,24 @@
     name: '{{ image }}'
 
 # configure mysql config
-- template:
-    backup: yes
-    src: my.cnf.j2
-    dest: '{{ mysql_my_cnf_file }}'
-  register: result
+- name: Ensure config directory does exist
+  file:
+    state: directory
+    path: '{{ mysql_my_cnf_file | dirname }}'
 
-- debug: var=result
+- name: Ensure mariadb config does exist
+  template:
+    backup: yes
+    src: maria.cnf.j2
+    dest: '{{ mysql_my_cnf_file }}'
+  when: mysql_image == 'mariadb'
+
+- name: Ensure mysql config does exist
+  template:
+    backup: yes
+    src: mysql.cnf.j2
+    dest: '{{ mysql_my_cnf_file }}'
+  when: mysql_image != 'mariadb'
 
 # create mysql container
 - name: Ensure mysql container is running
