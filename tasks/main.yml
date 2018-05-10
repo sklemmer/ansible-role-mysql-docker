@@ -9,9 +9,19 @@
     that: result|success
 
 - set_fact:
-    exposed_port: "{{ [ mysql_port + '3306' ] if mysql_expose_port else [] }}"
+    exposed_port: "{{ [ mysql_port + ':3306' ] if mysql_expose_port else [] }}"
     volumes: []
     image: '{{ mysql_image }}:{{ mysql_version }}'
+
+- set_fact:
+    volumes: "{{ volumes }} + {{ mysql_socket_path + ':' + mysql_socket_internal_path }}"
+  when: mysql_expose_socket == True
+
+- set_fact:
+    volumes: "{{ volumes }} + {{ mysql_data_path + ':' + mysql_data_internal_path }}"
+
+- set_fact:
+    volumes: "{{ volumes }} + {{ mysql_my_cnf_file + ':' + mysql_my_cnf_internal_file }}"
 
 # download mysql image
 - name: Ensure mysql image exists
