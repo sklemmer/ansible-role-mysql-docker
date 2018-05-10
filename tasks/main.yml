@@ -8,16 +8,27 @@
 - assert:
     that: result|success
 
-# download mysql image
-
-- name: Ensure mysql image exists
-  docker_image:
-    name: '{{ mysql_image }}:{{ mysql_version }}'
 
 - set_fact:
     exposed_port: "{{ [ mysql_port + '3306' ] if mysql_exposed_port else [] }}"
     volumes: []
+    image: '{{ mysql_image }}:{{ mysql_version }}'
+
+# download mysql image
+- name: Ensure mysql image exists
+  docker_image:
+    name: '{{ image }}'
 
 # create mysql container
 - assert:
     that: false == true
+
+- name: Ensure mysql container is running
+  docker_container:
+    name: '{{ mysql_container_name }}'
+    image: '{{ image }}'
+    state: present
+    ports: '{{ exposed_port }}'
+    volumes: '{{ volumes }}'
+    env:
+      MYSQL_ROOT_PASSWORD: '{{ mysql_root_password }}'

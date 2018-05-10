@@ -2,6 +2,8 @@
 # with port
 - hosts: mysql
   remote_user: root
+  become: true
+  become_method: sudo
   vars:
     mysql_image: mariadb
     mysql_version: latest
@@ -17,6 +19,8 @@
 # with socket
 - hosts: mysql
   remote_user: root
+  become: true
+  become_method: sudo
   vars:
     mysql_image: mariadb
     mysql_version: latest
@@ -33,6 +37,8 @@
 # with socket and port
 - hosts: mysql
   remote_user: root
+  become: true
+  become_method: sudo
   vars:
     mysql_image: mariadb
     mysql_version: latest
