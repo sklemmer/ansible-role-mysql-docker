@@ -1,6 +1,6 @@
 ---
 # with port
-- hosts: localhost
+- hosts: mysql
   remote_user: root
   vars:
     mysql_image: mariadb
@@ -15,7 +15,7 @@
 
 
 # with socket
-- hosts: localhost
+- hosts: mysql
   remote_user: root
   vars:
     mysql_image: mariadb
@@ -31,7 +31,7 @@
 
 
 # with socket and port
-- hosts: localhost
+- hosts: mysql
   remote_user: root
   vars:
     mysql_image: mariadb
