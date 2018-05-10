@@ -12,28 +12,43 @@
     exposed_port: "{{ [ mysql_port + ':3306' ] if mysql_expose_port else [] }}"
     volumes: []
     image: '{{ mysql_image }}:{{ mysql_version }}'
+    data_volume: "{{ mysql_data_path + ':' + mysql_data_internal_path }}"
+    cnf_volume: "{{ mysql_my_cnf_file + ':' + mysql_my_cnf_internal_file }}"
 
 - set_fact:
-    volumes: "{{ volumes }} + [ {{ mysql_socket_path + ':' + mysql_socket_internal_path }} ]"
+    socket_volume: "{{ mysql_socket_path + ':' + mysql_socket_internal_path }}"
   when: mysql_expose_socket == True
 
 - set_fact:
-    volumes: "{{ volumes }} + [ {{ mysql_data_path + ':' + mysql_data_internal_path }} ]"
+    volumes: "{{ volumes }} + [ '{{ socket_volume }}' ]"
+  when: mysql_expose_socket == True
 
 - set_fact:
-    volumes: "{{ volumes }} + [ {{ mysql_my_cnf_file + ':' + mysql_my_cnf_internal_file }} ]"
+    volumes: "{{ volumes }} + [ '{{ data_volume }}' ]"
+
+- set_fact:
+    volumes: "{{ volumes }} + [ '{{ cnf_volume }}' ]"
 
 # download mysql image
 - name: Ensure mysql image exists
   docker_image:
     name: '{{ image }}'
 
+# configure mysql config
+- template:
+    backup: yes
+    src: my.cnf.j2
+    dest: '{{ mysql_my_cnf_file }}'
+  register: result
+
+- debug: var=result
+
 # create mysql container
 - name: Ensure mysql container is running
   docker_container:
     name: '{{ mysql_container_name }}'
     image: '{{ image }}'
-    state: present
+    state: started
     ports: '{{ exposed_port }}'
     volumes: '{{ volumes }}'
     env:

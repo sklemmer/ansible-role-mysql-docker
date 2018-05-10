@@ -1,6 +1,6 @@
 ---
 # install docker
-- hosts: docker
+- hosts: all
   remote_user: root
   become: true
   become_method: sudo

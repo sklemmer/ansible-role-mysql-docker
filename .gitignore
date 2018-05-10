@@ -1,1 +1,4 @@
 /**/*.retry
+.vagrant
+ubuntu-xenial-*.log
+tests/external

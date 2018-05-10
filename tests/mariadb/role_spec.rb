@@ -31,6 +31,16 @@ describe mysql_conf('/etc/mysql/with_port.cnf') do
   its('port') { should eq '3306' }
 end
 
+describe file('/etc/mysql/with_port.cnf') do
+  it { should exist }
+  its('type') { should eq :file }
+end
+
+describe port(3306) do
+  its('protocols') { should include 'tcp' }
+  its('addresses') { should include '0.0.0.0' }
+end
+
 ##
 # with socket
 ##
@@ -45,6 +55,16 @@ end
 
 describe mysql_conf('/etc/mysql/with_socket.cnf') do
   its('socket') { should eq '/var/run/mysqld/mysql_socket.sock' }
+end
+
+describe file('/etc/mysql/with_socket.cnf') do
+  it { should exist }
+  its('type') { should eq :file }
+end
+
+describe file('/var/run/mysqld/mysql_socket.sock') do
+  it { should exist }
+  its('type') { should eq :socket }
 end
 
 ##
@@ -62,4 +82,19 @@ end
 describe mysql_conf('/etc/mysql/my.cnf') do
   its('port') { should eq '3306' }
   its('socket') { should eq '/var/run/mysqld/mysql.sock' }
+end
+
+describe file('/etc/mysql/my.cnf') do
+  it { should exist }
+  its('type') { should eq :file }
+end
+
+describe file('/var/run/mysqld/mysql.sock') do
+  it { should exist }
+  its('type') { should eq :socket }
+end
+
+describe port(3307) do
+  its('protocols') { should include 'tcp' }
+  its('addresses') { should include '0.0.0.0' }
 end

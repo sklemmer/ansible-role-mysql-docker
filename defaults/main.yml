@@ -18,3 +18,7 @@ mysql_my_cnf_file: /etc/mysql/my.cnf
 mysql_my_cnf_internal_file: /etc/mysql/my.cnf
 
 mysql_root_password: 'mysecretpassword'
+
+mysqld_config:
+  key_buffer_size: '16M'
+  max_allowed_packet: '8M'

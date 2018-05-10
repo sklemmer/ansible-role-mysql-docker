@@ -30,10 +30,11 @@ install:
   - pip install ansible==${ANSIBLE_VERSION}
 
 before_script:
-  - ansible-galaxy install -p ../ -r tests/requirements.yml
+  - mkdir -p tests/external
+  - ansible-galaxy install -p tests/external -r tests/requirements.yml
   - ansible-playbook -i tests/inventory tests/docker.yml
 
 script:
   - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml --syntax-check
-  - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml -vvv 
+  - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml -vvv
   - inspec exec tests/${SUITE}/role_spec.rb
