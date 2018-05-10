@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  remote_user: root
+  vars:
+    mysql_image: mariadb
+    mysql_version: latest
+  roles:
+    - docker
+    - ansible-role-mysql-docker

@@ -1,2 +1,19 @@
 ---
 # tasks file for ansible-role-mysql-docker
+- name: Test if docker is installed
+  command: docker
+  register: result
+  ignore_errors: True
+
+- assert:
+    that: result|success
+
+# download mysql image
+
+- set_fact:
+    exposed_port: "{{ [ mysql_port + '3306' ] if mysql_exposed_port else [] }}"
+    volumes: []
+
+# create mysql container
+- assert:
+    that: false == true
