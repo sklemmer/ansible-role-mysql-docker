@@ -14,6 +14,8 @@ env:
   - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.5 SUITE=default
 
 before_install:
+  - rvm get stable --auto-dotfiles
+  - rvm install 2.3.1
   - gem install inspec
 
 install:
@@ -22,4 +24,4 @@ install:
 script:
   - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml --syntax-check
   - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml
-  - inspec exec tests/${SUITE}/role_spec.rb
+  - sudo inspec exec tests/${SUITE}/role_spec.rb
