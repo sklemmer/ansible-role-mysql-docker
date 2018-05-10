@@ -8,9 +8,8 @@
 - assert:
     that: result|success
 
-
 - set_fact:
-    exposed_port: "{{ [ mysql_port + '3306' ] if mysql_exposed_port else [] }}"
+    exposed_port: "{{ [ mysql_port + '3306' ] if mysql_expose_port else [] }}"
     volumes: []
     image: '{{ mysql_image }}:{{ mysql_version }}'
 
