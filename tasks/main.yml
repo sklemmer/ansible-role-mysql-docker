@@ -19,9 +19,6 @@
     name: '{{ image }}'
 
 # create mysql container
-- assert:
-    that: false == true
-
 - name: Ensure mysql container is running
   docker_container:
     name: '{{ mysql_container_name }}'

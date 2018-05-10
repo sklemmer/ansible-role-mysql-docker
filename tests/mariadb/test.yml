@@ -2,8 +2,6 @@
 # with port
 - hosts: mysql
   remote_user: root
-  become: true
-  become_method: sudo
   vars:
     mysql_image: mariadb
     mysql_version: latest
@@ -12,15 +10,12 @@
     mysql_container_name: maria-with-port
     mysql_my_cnf_file: /etc/mysql/with_port.cnf
   roles:
-    - docker
     - ansible-role-mysql-docker
 
 
 # with socket
 - hosts: mysql
   remote_user: root
-  become: true
-  become_method: sudo
   vars:
     mysql_image: mariadb
     mysql_version: latest
@@ -30,15 +25,11 @@
     mysql_socket_path: /var/run/mysqld/mysql_socket.sock
     mysql_my_cnf_file: /etc/mysql/with_socket.cnf
   roles:
-    - docker
     - ansible-role-mysql-docker
-
 
 # with socket and port
 - hosts: mysql
   remote_user: root
-  become: true
-  become_method: sudo
   vars:
     mysql_image: mariadb
     mysql_version: latest
@@ -46,5 +37,4 @@
     mysql_expose_socket: True
     mysql_container_name: mariadb
   roles:
-    - docker
     - ansible-role-mysql-docker
