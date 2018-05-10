@@ -12,3 +12,5 @@ mysql_socket_internal_path: /var/run/mysqld/mysql.socket
 mysql_socket_path: /var/run/mysql.sock
 
 mysql_data_path: /data/var/lib/mysql
+
+mysql_my_cnf_file: /etc/mysql/my.cnf
