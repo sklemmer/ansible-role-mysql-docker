@@ -1,0 +1,28 @@
+language: python
+python: "2.7"
+
+services: docker
+
+addons:
+  apt:
+    update: True
+    packages:
+      - python-apt
+
+env:
+  - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.4 SUITE=default
+  - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.5 SUITE=default
+
+before_install:
+  - gem install inspec
+
+install:
+  - pip install ansible==${ANSIBLE_VERSION}
+  - ansible-galaxy install -p ../ -r tests/requirements.yml
+script:
+  - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml --syntax-check
+  - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml
+  - inspec exec tests/${SUITE}/role_spec.rb
+after_script:
+  - ls -al /etc/docker
+  - ls -al /etc
