@@ -23,6 +23,3 @@ script:
   - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml --syntax-check
   - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml
   - inspec exec tests/${SUITE}/role_spec.rb
-after_script:
-  - ls -al /etc/docker
-  - ls -al /etc
