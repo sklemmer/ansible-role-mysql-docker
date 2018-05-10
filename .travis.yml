@@ -14,8 +14,11 @@ addons:
       - ruby-dev
 
 env:
-  - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.4 SUITE=default
-  - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.5 SUITE=default
+  global:
+    - ANSIBLE_CONFIG=tests/ansible.cfg
+  matrix:
+    - ANSIBLE_VERSION=2.4 SUITE=default
+    - ANSIBLE_VERSION=2.5 SUITE=default
 
 before_install:
   - rvm @global do gem install inspec
