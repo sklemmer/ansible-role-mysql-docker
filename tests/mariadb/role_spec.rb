@@ -59,7 +59,7 @@ describe docker_container('maria') do
   its('ports') { should eq ["3306:3306"] }
 end
 
-describe mysql_conf do
+describe mysql_conf('/etc/mysql/my.cnf') do
   its('port') { should eq '3306' }
   its('socket') { should eq '/var/run/mysqld/mysql.sock' }
 end
