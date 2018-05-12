@@ -16,11 +16,10 @@ addons:
 env:
   global:
     - ANSIBLE_CONFIG=tests/ansible.cfg
+    - ANSIBLE_VERSION=2.5
   matrix:
-    - ANSIBLE_VERSION=2.4 SUITE=mariadb
-    - ANSIBLE_VERSION=2.5 SUITE=mariadb
-    - ANSIBLE_VERSION=2.4 SUITE=mysql
-    - ANSIBLE_VERSION=2.5 SUITE=mysql
+    - SUITE=mariadb
+    - SUITE=mysql
 
 before_install:
   - rvm @global do gem install inspec
