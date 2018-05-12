@@ -14,9 +14,3 @@ gem "kitchen-inspec", "~> 0.23.1"
 
 # Added at 2018-05-12 10:14:45 +0200 by svenklemmer:
 gem "kitchen-vagrant", "~> 1.3"
-
-# Added at 2018-05-12 10:16:12 +0200 by svenklemmer:
-gem "kitchen", "~> 0.0.3"
-
-# Added at 2018-05-12 10:17:37 +0200 by svenklemmer:
-gem "ffi", "~> 1.9"
