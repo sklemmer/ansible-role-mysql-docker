@@ -7,8 +7,60 @@
   roles:
     - docker
 
-
-- hosts: localhost
+# plain
+- hosts: all
   remote_user: root
+  become: true
+  become_method: sudo
+  vars:
+    mysql_image: mysql
+    mysql_expose_socket: False
+    mysql_container_name: mysql-plain
+    mysql_my_cnf_file: /etc/mysql/plain.cnf
+    mysql_data_path: /data/var/lib/mysql-plain
   roles:
     - ansible-role-mysql-docker
+
+# with port
+- hosts: all
+  remote_user: root
+  become: true
+  become_method: sudo
+  vars:
+    mysql_image: mysql
+    mysql_expose_port: True
+    mysql_expose_socket: False
+    mysql_port: '3307'
+    mysql_container_name: mysql-with-port
+    mysql_my_cnf_file: /etc/mysql/with_port.cnf
+    mysql_data_path: /data/var/lib/mysql-with-port
+  roles:
+    - ansible-role-mysql-docker
+
+# with socket
+#- hosts: all
+#  remote_user: root
+#  become: true
+#  become_method: sudo
+#  vars:
+#    mysql_image: mysql
+#    mysql_expose_port: False
+#    mysql_expose_socket: True
+#    mysql_container_name: maria-with-socket
+#    mysql_socket_path: /var/run/mysqld/mysql_socket
+#    mysql_my_cnf_file: /etc/mysql/with_socket.cnf
+#    mysql_data_path: /data/var/lib/mysql-with-socket
+#  roles:
+#    - ansible-role-mysql-docker
+
+# with socket and port
+#- hosts: all
+#  remote_user: root
+#  become: true
+#  become_method: sudo
+#  vars:
+#    mysql_image: mysql
+#    mysql_expose_port: True
+#    mysql_port: 3308
+#  roles:
+#    - ansible-role-mysql-docker

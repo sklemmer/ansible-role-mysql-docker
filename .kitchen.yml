@@ -25,16 +25,16 @@ verifier:
   name: inspec
 
 suites:
-  - name: mariadb
-    provisioner:
-      playbook: "./tests/mariadb/test.yml"
-    verifier:
-      inspec_tests:
-        - path: tests/mariadb/
-
-#  - name: mysql
+#  - name: mariadb
 #    provisioner:
-#      playbook: "./tests/mysql/test.yml"
+#      playbook: "./tests/mariadb/test.yml"
 #    verifier:
 #      inspec_tests:
-#        - path: tests/mysql/
+#        - path: tests/mariadb/
+
+  - name: mysql
+    provisioner:
+      playbook: "./tests/mysql/test.yml"
+    verifier:
+      inspec_tests:
+        - path: tests/mysql/
