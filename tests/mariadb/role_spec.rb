@@ -49,10 +49,6 @@ control "plain" do
     its('mysqld.socket') { should eq '/var/run/mysqld/mysql.sock' }
     its('mysqld_safe.socket') { should eq '/var/run/mysqld/mysql.sock' }
   end
-  # port existence
-  describe port(3306) do
-    it { should_not be_listening }
-  end
   # data directory existence
   describe directory('/data/var/lib/mysql-plain') do
     it { should exist }
