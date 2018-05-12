@@ -1,0 +1,40 @@
+---
+driver:
+  name: vagrant
+
+platforms:
+  - name: ubuntu-16.04
+  #- name: ubuntu-18.04
+
+provisioner:
+  name: ansible_playbook
+  role_name: ansible-role-mysql-docker
+  ansible_cfg_path: "./tests/ansible.cfg"
+  ansible_inventory: "./tests/inventory"
+  requirements_path: tests/requirements.yml
+  #### general
+  ansible_verbose: true
+  idempotency_test: true
+  diff: true
+  #https://github.com/geerlingguy/ansible-role-mysql/issues/212
+  sudo_command: sudo -H
+  custom_post_install_command: |
+    sudo apt-get install -y -q python-pip
+
+verifier:
+  name: inspec
+
+suites:
+  - name: mariadb
+    provisioner:
+      playbook: "./tests/mariadb/test.yml"
+    verifier:
+      patterns:
+        - "./tests/mariadb/role_spec.rb"
+
+  - name: mysql
+    provisioner:
+      playbook: "./tests/mysql/test.yml"
+    verifier:
+      patterns:
+        - "./tests/mysql/role_spec.rb"

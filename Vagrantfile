@@ -26,9 +26,10 @@ Vagrant.configure("2") do |config|
       end
 
       $script = <<-SCRIPT
-      apt update
-      apt install -y python python-apt python-pip
+      apt update -q
+      apt install -y python python-apt python-pip ruby ruby-dev
       pip install ansible==2.4
+      gem install inspec
       SCRIPT
       b.vm.provision "shell", inline: $script
 

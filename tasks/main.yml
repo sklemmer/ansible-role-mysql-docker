@@ -6,7 +6,7 @@
   ignore_errors: True
 
 - assert:
-    that: result|success
+    that: result is success
 
 - set_fact:
     exposed_port: "{{ [ mysql_port + ':3306' ] if mysql_expose_port else [] }}"
