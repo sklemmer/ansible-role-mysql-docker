@@ -30,7 +30,7 @@
     mysql_expose_port: False
     mysql_expose_socket: True
     mysql_container_name: maria-with-socket
-    mysql_socket_path: /var/run/mysqld/mysql_socket.sock
+    mysql_socket_path: /var/run/mysqld/mysql_socket
     mysql_my_cnf_file: /etc/mysql/with_socket.cnf
     mysql_data_path: /data/var/lib/mysql-with-socket
   roles:

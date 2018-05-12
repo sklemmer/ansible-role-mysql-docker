@@ -8,8 +8,8 @@ mysql_expose_socket: True
 mysql_container_name: mysql
 
 mysql_port: '3306'
-mysql_socket_internal_path: /var/run/mysqld/mysql.socket
-mysql_socket_path: /var/run/mysqld/mysql.socket
+mysql_socket_internal_path: /var/run/mysqld/socket
+mysql_socket_path: /var/run/mysqld/socket
 
 mysql_data_path: /data/var/lib/mysql
 mysql_data_internal_path: /var/lib/mysql
