@@ -28,7 +28,7 @@ control "plain" do
   title "Test mariadb without open ports and shared socket"
 
   # container status
-  describe docker_container('maria-with-port') do
+  describe docker_container('maria-plain') do
     it { should exist }
     it { should be_running }
     its('image') { should eq 'mariadb:latest' }
