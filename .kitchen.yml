@@ -32,9 +32,9 @@ suites:
       inspec_tests:
         - path: tests/mariadb/
 
-  - name: mysql
-    provisioner:
-      playbook: "./tests/mysql/test.yml"
-    verifier:
-      inspec_tests:
-        - path: tests/mysql/
+#  - name: mysql
+#    provisioner:
+#      playbook: "./tests/mysql/test.yml"
+#    verifier:
+#      inspec_tests:
+#        - path: tests/mysql/

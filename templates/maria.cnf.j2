@@ -1,8 +1,13 @@
-[client-server]
-port=3306
-socket={{ mysql_socket_internal_path }}/mysql.sock
+[client]
+port          = 3306
+socket        = {{ mysql_socket_internal_path }}/mysql.sock
+
+[mysqld_safe]
+socket        = {{ mysql_socket_internal_path }}/mysql.sock
 
 [mysqld]
+port          = 3306
+socket        = {{ mysql_socket_internal_path }}/mysql.sock
 {% for key, value in mysqld_config.iteritems() %}
     {{ key }}={{ value }}
 {% endfor %}
