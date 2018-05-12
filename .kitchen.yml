@@ -29,12 +29,12 @@ suites:
     provisioner:
       playbook: "./tests/mariadb/test.yml"
     verifier:
-      patterns:
-        - "./tests/mariadb/role_spec.rb"
+      inspec_tests:
+        - path: tests/mariadb/
 
   - name: mysql
     provisioner:
       playbook: "./tests/mysql/test.yml"
     verifier:
-      patterns:
-        - "./tests/mysql/role_spec.rb"
+      inspec_tests:
+        - path: tests/mysql/
