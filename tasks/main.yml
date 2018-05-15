@@ -29,7 +29,13 @@
 - set_fact:
     volumes: "{{ volumes }} + [ '{{ cnf_volume }}' ]"
 
-- name: Add the mysql user with group
+- name: Ensure group "mysql" exists
+  group:
+    name: mysql
+    state: present
+  when: mysql_expose_socket == True
+
+- name: Add the mysql user
   user:
     name: mysql
     group: mysql
