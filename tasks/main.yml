@@ -34,6 +34,13 @@
   docker_image:
     name: '{{ image }}'
 
+- name: Ensure socket dir does exist
+  file:
+    state: directory
+    mode: 0777
+    path: '{{ mysql_socket_path }}'
+  when: mysql_expose_socket == True
+
 # configure mysql config
 - name: Ensure config directory does exist
   file:
