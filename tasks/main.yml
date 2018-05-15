@@ -31,12 +31,14 @@
 
 - name: Ensure group "mysql" exists
   group:
+    gid: 999
     name: mysql
     state: present
   when: mysql_expose_socket == True
 
 - name: Add the mysql user
   user:
+    uid: 999
     name: mysql
     group: mysql
   when: mysql_expose_socket == True
