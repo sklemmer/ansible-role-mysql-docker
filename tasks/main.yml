@@ -29,6 +29,21 @@
 - set_fact:
     volumes: "{{ volumes }} + [ '{{ cnf_volume }}' ]"
 
+- name: Add the mysql user with group
+  user:
+    name: mysql
+    group: mysql
+  when: mysql_expose_socket == True
+
+- name: Ensure socket directory does exist
+  file:
+    state: directory
+    path: '{{ mysql_socket_path }}'
+    owner: mysql
+    group: mysql
+  when: mysql_expose_socket == True
+
+
 # download mysql image
 - name: Ensure mysql image exists
   docker_image:
