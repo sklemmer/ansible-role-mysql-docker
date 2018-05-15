@@ -37,7 +37,7 @@
 - name: Ensure socket dir does exist
   file:
     state: directory
-    mode: 0777
+    mode: 0755
     path: '{{ mysql_socket_path }}'
   when: mysql_expose_socket == True
 
