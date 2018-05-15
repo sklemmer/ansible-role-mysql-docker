@@ -29,29 +29,6 @@
 - set_fact:
     volumes: "{{ volumes }} + [ '{{ cnf_volume }}' ]"
 
-- name: Ensure group "mysql" exists
-  group:
-    gid: 999
-    name: mysql
-    state: present
-  when: mysql_expose_socket == True
-
-- name: Add the mysql user
-  user:
-    uid: 999
-    name: mysql
-    group: mysql
-  when: mysql_expose_socket == True
-
-- name: Ensure socket directory does exist
-  file:
-    state: directory
-    path: '{{ mysql_socket_path }}'
-    owner: mysql
-    group: mysql
-  when: mysql_expose_socket == True
-
-
 # download mysql image
 - name: Ensure mysql image exists
   docker_image:
@@ -75,6 +52,7 @@
     name: '{{ mysql_container_name }}'
     image: '{{ image }}'
     state: started
+    user: '{{ ansible_user_id }}'
     ports: '{{ exposed_port }}'
     volumes: '{{ volumes }}'
     env:
