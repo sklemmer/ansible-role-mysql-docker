@@ -21,5 +21,5 @@ mysql_root_password: 'mysecretpassword'
 
 mysqld_config:
   key_buffer_size: '16M'
-  max_allowed_packet: '16M'
+  max_allowed_packet: '128M'
   default_storage_engine: InnoDB
