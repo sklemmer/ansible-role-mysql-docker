@@ -15,7 +15,7 @@ mysql_data_path: /data/var/lib/mysql
 mysql_data_internal_path: /var/lib/mysql
 
 mysql_my_cnf_file: /etc/mysql/my.cnf
-mysql_my_cnf_internal_file: /etc/mysql/conf.d/custom.cnf
+mysql_my_cnf_internal_file: /etc/mysql/my.cnf
 
 mysql_root_password: 'mysecretpassword'
 
